@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+
+# flags for more optimization
+FLAGS="-O2 -Wall -Wextra -Werror -Wfatal-errors -std=c99 -pedantic"
+
+gcc $FLAGS -c stride.c
+gcc $FLAGS -o stride stride.o
