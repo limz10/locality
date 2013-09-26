@@ -1,7 +1,7 @@
                  COMP 40 Lab: Striding Through Memory
                          (for groups of two)
 
-                          September 30, 2011
+                          September 28, 2012
 
 +--------------------------------------------------------+
 |Keeper of the record:                                   |
@@ -20,7 +20,7 @@ Reminder: our machines have line sizes of 64 bytes.
 
   1. Suppose you load 64 bytes at addresses
 
-         a, a+k, a+2k, .. a+63k
+         a, a + k, a + 2k, ..., a + 63k
 
      where address `a` occurs at offset 0 of a cache line.
      Suppose that k, which is called the "stride", is at most 64.
@@ -57,11 +57,11 @@ spanning a block of B bytes starting at address `a`:
     a <= p < a + B
 
 Further suppose that your access pattern changes so that when you
-go beyond block B, you "wrap around" back to the beginning.  More
+go beyond block B, you wrap around back to the beginning.  More
 precisely, suppose you load all the bytes of B in the following
 sequence:
 
-    a, a+k, a+2k, ... a+(nk mod B), ..., a + ((B-1)k mod B)
+    a, a + k, a + 2k, ..., a + (nk mod B), ..., a + ((B - 1)k mod B)
 
 
   4. The memory block is divided into 64-byte sub-blocks, each of
@@ -92,13 +92,13 @@ and a stride of 7, you write
      cache and stride varies from 1 to 64.  Try these machines:
 
          A. linux
-         B. meteor
-         C. titan
-         D. your lab machine (you will need to recompile again)
+         B. pulsar or meteor
+         C. your lab machine
          E. a Linux or OSX laptop, if you have one
 
      For each experiment, **plot the results on a graph.**
 
+        - You do not need to hand in the graphs.
         - As described in the lab handout, label the graph with the
           name of the machine, its CPU, the clock rate, the size of
           the L2 cache, the amount of RAM, and the block size B.
@@ -116,7 +116,7 @@ and a stride of 7, you write
      following bash script:
 
          B=50 # block size in megabytes
-         for ((k=1; k<=64; k++)); do
+         for ((k = 1; k <= 64; k++)); do
            ./stride $B $k
          done
 
@@ -124,7 +124,7 @@ and a stride of 7, you write
      line:
 
          B=50
-         for ((k=1; k<=64; k++)); do ./stride $B $k; done
+         for ((k = 1; k <= 64; k++)); do ./stride $B $k; done
 
      Or you can put it in a file and run the file with bash.         
 
@@ -156,22 +156,13 @@ and a stride of 7, you write
      that suggests something else might be going on?  What might be
      going on?
 
- 11. Repeat the experiments for other block sizes B, as described in
-     questions 6 and 7.   In what ways, if any, do the results differ?
-     In what ways, if any, are the results different from what you
-     expect.
-
- 12. Perform an experiment to test your answer to question 2, about
-     strides larger than 64.  You could start with strides 64-128.
-     Are the outcomes consistent with your expectations?
-
 
 PART IV: KEEPING UP WITH THE ARCHITECTS
 
 You will discover that some machines behave very much according to the
 naive model we studied in class.  Others do not.
 
- 13. Choose one misbehaving machine and keep increasing the stride
+ 11. Choose one misbehaving machine and keep increasing the stride
      until you start to see interesting behavior.  In some cases you
      may have to explore strides in the range of 1,000 to 10,000.
      In such a large experimental space, you cannot afford to test
