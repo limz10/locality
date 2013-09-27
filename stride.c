@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
         size_t bytes = megabytes * 1024 * 1024;
         char  *p     = malloc(bytes);
 
-        if (p != NULL) {
+        if (p == NULL) {
                 if ((double)(size_t) megabytes == megabytes)
                         fprintf(stderr, "%s: Cannot allocate %.2fMiB\n",
                                 argv[0], megabytes);
