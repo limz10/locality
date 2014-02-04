@@ -5,27 +5,28 @@
 
 // define a private version of each function in A2Methods_T that we implement
 
-static A2Methods_UArray2 new(int width, int height, int size) {
-  return UArray2_new(...);
+static A2Methods_UArray2 new(int width, int height, int size)
+{
+	return UArray2_new(...);
 }
 
 static A2Methods_UArray2 new_with_blocksize(int width, int height, int size,
-                                        int blocksize)
+					    int blocksize)
 {
-  (void) blocksize;
-  return UArray2_new(...);
+	(void)blocksize;
+	return UArray2_new(...);
 }
 
- ... many more private (static) definitions follow ...
-
+...many more private(static)
+definitions follow ...
 // now create the private struct containing pointers to the functions
-
 static struct A2Methods_T uarray2_methods_plain_struct = {
-  new,
-  new_with_blocksize,
-   ... other functions follow in order, with NULL for those not implemented ...
-};
+	new,
+	new_with_blocksize,
+	...other functions follow in order, with NULL for those
+		not implemented...
+		};
 
 // finally the payoff: here is the exported pointer to the struct
 
-A2Methods_T uarray2_methods_plain = &uarray2_methods_plain_struct;
+	A2Methods_T uarray2_methods_plain = &uarray2_methods_plain_struct;
