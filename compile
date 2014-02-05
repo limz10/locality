@@ -38,15 +38,16 @@ done
 # link together .o files + libraries to make executable binaries
 # using one case statement per executable binary
 case $link in
-  all|a2test) gcc $FLAGS $LFLAGS -o a2test a2test.o \
+  all|a2test) gcc $FLAGS -o a2test a2test.o\
                   uarray2b.o uarray2.o a2plain.o \
-                  $LIBS 
+                  $LIBS $LFLAGS 
               linked=yes ;;
 esac
 
 case $link in
-  all|ppmtrans) gcc $FLAGS $LFLAGS -o ppmtrans ppmtrans.o \
-                  remaining-objects-and-libraries-need-filling-in-here.o
+  all|ppmtrans) gcc $FLAGS -o ppmtrans ppmtrans.o \
+                  remaining-objects-and-libraries-need-filling-in-here.o \
+                  $LIBS $CIILIBS  $LFLAGS 
                   linked=yes ;;
 esac
 
