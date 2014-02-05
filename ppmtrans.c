@@ -17,10 +17,30 @@ usage(const char *progname)
 	exit(1);
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char *argv[]) 
 {
-	int rotation = 0;
-	int i;
+        int i;
+        int rotation = 0;
+
+        /* default to UArray2 methods */
+        A2Methods_T methods = uarray2_methods_plain; 
+        assert(methods);
+
+        /* default to best map */
+        A2Methods_mapfun *map = methods->map_default; 
+        assert(map);
+
+#define SET_METHODS(METHODS, MAP, WHAT) do {                            \
+                methods = (METHODS);                                    \
+                assert(methods != NULL);                                \
+                map = methods->MAP;                                     \
+                if (map == NULL) {                                      \
+                        fprintf(stderr, "%s does not support "          \
+                                        WHAT "mapping\n",               \
+                                argv[0]);                               \
+                        exit(1);                                        \
+                }                                                       \
+        } while (0)
 
 
 	for (i = 1; i < argc; i++) {
@@ -58,6 +78,5 @@ int main(int argc, char *argv[])
 			break;
 		}
 	}
-	printf("It worked\n");
 	assert(0);		// the rest of this function is not yet implemented
 }
