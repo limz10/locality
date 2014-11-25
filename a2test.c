@@ -136,7 +136,10 @@ static void test_methods(A2Methods_T methods_under_test)
                 fprintf(stderr, "Some full mapping methods are missing\n");
 
         A2 array = methods->new_with_blocksize(W, H, sizeof(unsigned), BS);
+<<<<<<< HEAD
         
+=======
+>>>>>>> 35c34b0400371f61d82ad4ec0a7a7597d6238204
         copy_unsigned(methods, array,  2,  1, 99);
         copy_unsigned(methods, array,  3,  3, 88);
         copy_unsigned(methods, array, 10, 10, 77);
@@ -167,7 +170,11 @@ int main(int argc, char *argv[])
         assert(argc == 1);
         (void)argv;
         test_methods(uarray2_methods_plain);
+<<<<<<< HEAD
         test_methods(uarray2_methods_blocked);
+=======
+        /*  test_methods(uarray2_methods_blocked); */
+>>>>>>> 35c34b0400371f61d82ad4ec0a7a7597d6238204
         printf("Passed.\n");  /* only if we reach this point without
                                * assertion failure
                                */

@@ -46,7 +46,11 @@ esac
 
 case $link in
   all|ppmtrans) gcc $FLAGS -o ppmtrans ppmtrans.o \
+<<<<<<< HEAD
                   uarray2.o uarray2b.o a2plain.o a2blocked.o\
+=======
+                  remaining-objects-and-libraries-need-filling-in-here.o \
+>>>>>>> 35c34b0400371f61d82ad4ec0a7a7597d6238204
                   $LIBS $CIILIBS  $LFLAGS 
                   linked=yes ;;
 esac
