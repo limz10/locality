@@ -1,0 +1,88 @@
+This is the README file for the locality assignment
+by Mingzhe Li (mli04) and Mengtian Li (mli09), 10/2/14
+
+We would like to acknowledge help that we have received from Professor
+Noah Mendelsohn, TAs Alexander Tong, Alison Tai, Jacob Gerace, 
+Margaret Stratton
+
+Acknowledgments: Noah, and the TA who stay up until 1am on Thursday night. 
+                 Other classmates who discuss the program with us
+
+What has been working and not: Our UArray2b implementation has all the 
+         functions working, essentially at() and map(), which not only
+         enabled the -block-major option of the program, but also improved 
+         memory locality and thus enhancing the overall performance of the 
+         program.
+
+         Our a2plain methods suite works well and efficiently too.
+
+         Our final program meets all the requirements of the assignment with 
+         good memory management.
+
+Architechture of our solution: 
+              
+              For UArray2b.c We followed instructor's idea of design, 
+              using a UArray2 to represent the blocks and within each block, 
+              a UArray.
+
+              For a2plain.c In the spirit of the provided implementation of 
+              blocked structure(UArray2b.c), we created a very similar 
+              implementation for a2plain.c
+
+              For ppmtrans.c We used the code Noah provided to us to identify 
+              arguments on the command line and select each method and map
+              function to be used. Then we used these functions to call 
+              different apply functions from the a2methods suite to modify 
+              the given ppm file and write the modified file to a new ppm image.
+
+Measure speeds for Part E:
+
+/usr/bin/time ./ppmtrans -rotate 90 mobo.ppm | display -
+2.59user 0.28system 0:04.51elapsed 63%CPU 
+(0avgtext+0avgdata 5465616maxresident)k 292616inputs+0outputs 
+(0major+3166minor)pagefaults 0swaps
+
+/usr/bin/time ./ppmtrans -rotate 90 -col-major mobo.ppm | display -
+3.23user 0.20system 0:03.54elapsed 97%CPU 
+(0avgtext+0avgdata 5465616maxresident)k 0inputs+0outputs 
+(0major+3677minor)pagefaults 0swaps
+
+/usr/bin/time ./ppmtrans -rotate 90 -block-major mobo.ppm | display -
+5.59user 0.41system 0:06.12elapsed 98%CPU 
+(0avgtext+0avgdata 7841312maxresident)k 0inputs+0outputs 
+(0major+345155minor)pagefaults 0swaps
+
+
+
+
+/usr/bin/time ./ppmtrans -rotate 180 -row-major mobo.ppm | display -
+2.76user 0.18system 0:03.04elapsed 96%CPU 
+(0avgtext+0avgdata 5465552maxresident)k 0inputs+0outputs 
+(0major+3673minor)pagefaults 0swaps
+
+/usr/bin/time ./ppmtrans -rotate 180 -col-major mobo.ppm | display -
+3.53user 0.19system 0:03.83elapsed 97%CPU 
+(0avgtext+0avgdata 5465552maxresident)k 0inputs+0outputs 
+(0major+4184minor)pagefaults 0swaps
+
+/usr/bin/time ./ppmtrans -rotate 180 -block-major mobo.ppm | display -
+5.78user 0.40system 0:06.31elapsed 98%CPU 
+(0avgtext+0avgdata 7838832maxresident)k 0inputs+0outputs 
+(0major+345000minor)pagefaults 0swaps
+
+
+From the above results, we could tell for both 90-degree rotation
+and 180-degree rotation,  -row-major runs the fastest,
+-col-major and -block-major following it.
+
+Theoretically the -block-major method should have the best
+performance, especially on large inputs.  Should we have more time,
+we would definitely look into the reason why it is behaving the 
+otherwise.  One possible explanation is that we did not wrote
+the mapping function to its fastest potential.
+
+All of the three mapping methods are able to execute the large image
+in several seconds.  This result is pretty satisfying.
+
+
+50+ hours were spent on this assignment
